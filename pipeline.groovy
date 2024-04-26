@@ -77,12 +77,11 @@ pipeline{
         
         }
         stage('Image push artifactorio'){
+            agent any
             steps{
                 script{
-                       
-                    sh "hostname"
-                    echo "probando" > nuevo.txt
-
+                    unstash 'backartifact'
+                    sh "sshpass -p Password1 scp /data/jenkins_slave/workspace/APP-DEV/build_back_repo/am-core-web-service/target/app.jar  userver@192.168.137.3:/home/userver/"  
                 }
             }
         }
