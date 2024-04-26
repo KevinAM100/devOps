@@ -76,6 +76,16 @@ pipeline{
             }
         
         }
+        stage('Image push artifactorio'){
+            steps{
+                script{
+                       
+                    sh "hostname"
+                    sh echo "probando" > nuevo.txt
+                    
+                }
+            }
+        }
         
         
     }
