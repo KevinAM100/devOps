@@ -7,6 +7,7 @@ pipeline{
     tools{
         maven 'maven-396'
         jdk 'jdk21'
+        dockerTool 'docker'
     }
     parameters{
          string defaultValue: 'dev', description: 'Colocar un brach a deployar', name: 'BRANCH', trim: false
@@ -76,16 +77,18 @@ pipeline{
             }
         
         }
-        stage('Image push artifactorio'){
-            agent any
-            steps{
-                script{
-                    unstash 'backartifact'
-                    sh "sshpass -p Password1 scp /data/jenkins_slave/workspace/APP-DEV/build_back_repo/am-core-web-service/target/app.jar  userver@192.168.137.3:/home/userver/"  
-                }
+        stage('Build Docker Image') {
+            
+            steps {
+                unstash name:'backartifact'
+                sh "docker --version"
+                sh "pwd"
+                sh "docker build -t mi-aplicacion:1.0 ."
+                sh "docker tag mi-aplicacion:1.0 dafnec/academy-mg:0.0.1"
+                sh "docker login -u cruzdafne123@gmail.com -p 12937234dxca"
+                sh "docker push dafnec/academy-mg:0.0.1"
+                
             }
-        }
-        
-        
+        }   
     }
 }
