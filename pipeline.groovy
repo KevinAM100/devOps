@@ -83,12 +83,12 @@ pipeline{
                 unstash name:'backartifact'
                 sh "docker --version"
                 sh "pwd"
-                sh "docker build -t mi-aplicacion:1.0 ."
-                sh "docker tag mi-aplicacion:1.0 dafnec/academy-mg:0.0.1"
+                sh "docker build -t academy-mg-back:1.0 ."
+                sh "docker tag academy-mg-back:1.0 dafnec/academy-mg-bck:0.0.1"
                 sh "docker login -u cruzdafne123@gmail.com -p 12937234dxca"
-                sh "docker push dafnec/academy-mg:0.0.1"
+                sh "docker push dafnec/academy-mg-bck:0.0.1"
                 
             }
-        }   
+        }  
     }
 }
