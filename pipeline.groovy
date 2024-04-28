@@ -78,7 +78,6 @@ pipeline{
         
         }
         stage('Build Docker Image') {
-            
             steps {
                 unstash name:'backartifact'
                 sh "docker --version"
